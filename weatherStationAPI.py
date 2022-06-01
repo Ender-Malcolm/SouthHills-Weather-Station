@@ -11,6 +11,9 @@ from adafruit_bme280 import basic as adafruit_bme280
 import board
 import digitalio
 
+# Set Environment Secret
+API_KEY = os.environ['API_KEY']
+
 # Imports for windspeed counting
 import time, sys, threading
 from datetime import datetime
@@ -54,9 +57,10 @@ print('This ran!')
 
 @app.route("/")
 def weatherIndicated():
+    global API_KEY
     print('This Also Ran!')
     response = requests.get(
-        "https://api.openweathermap.org/data/2.5/weather?zip=16602,us&appid=431d09d780e3c761a8589f7bd5273fe0&units=imperial"
+        "https://api.openweathermap.org/data/2.5/weather?zip=16602,us&appid=API_KEY&units=imperial"
     )
     weather = response.json()
     # print(weather)
